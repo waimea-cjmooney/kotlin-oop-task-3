@@ -186,18 +186,14 @@ class Steps() {
      */
     fun gnomeOnStep(stepNum: Int): Gnome? {
 
-        return if (stepNum in 1..5) {
-            steps[stepNum-1]
-        } else null
+        return if (stepNum in 1..5) steps[stepNum-1] else null
     }
 
     /**
      * Clear any gnomes off the given step (1-5)
      */
     fun clearStep(step: Int) {
-        if (step in 1..5) {
-            steps[step-1] = null
-        }
+        if (step in 1..5) steps[step-1] = null
     }
 
     /**
