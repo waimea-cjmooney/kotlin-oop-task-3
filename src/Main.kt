@@ -141,29 +141,43 @@ class Steps() {
      * etc.
      */
     fun show() {
-
+        for ((index, gnome) in steps.withIndex()){
+            print("${index + 1}. ")
+            println(if (gnome == null) "" else gnome.name)
+        }
     }
 
     /**
      * Return the number of gnomes on steps
      */
     fun gnomeCount(): Int {
-        return 0
+        var count: Int = 0
+        for (step in steps) {
+            if (step != null) {
+                count++
+            }
+        }
+        return count
     }
 
     /**
      * Place a given gnome on the given step (1-5)
      */
     fun placeGnome(step: Int, gnome: Gnome) {
-
+        if (step in 1..5) {
+            removeGnome(gnome)
+            steps[step-1] = gnome
+            println("${steps[step-1]?.name} $step")
+        }
     }
+
 
     /**
      * Find a given gnome on the steps. Return the
      * step number (1-5) if found, or 0 if not
      */
     fun stepNumOfGnome(gnome: Gnome): Int {
-        return 0
+        return if (gnome in steps) steps.indexOf(gnome) + 1 else 0
     }
 
     /**
@@ -171,21 +185,29 @@ class Steps() {
      * or null if out of range or empty
      */
     fun gnomeOnStep(stepNum: Int): Gnome? {
-        return null
+
+        return if (stepNum in 1..5) {
+            steps[stepNum-1]
+        } else null
     }
 
     /**
      * Clear any gnomes off the given step (1-5)
      */
     fun clearStep(step: Int) {
-
+        if (step in 1..5) {
+            steps[step-1] = null
+        }
     }
 
     /**
      * Remove a given gnome from the steps
      */
     fun removeGnome(gnome: Gnome) {
-
+        if (steps.indexOf(gnome)+1 in 1..5) {
+            println(steps.indexOf(gnome))
+            steps[steps.indexOf(gnome)] = null
+        }
     }
 }
 
